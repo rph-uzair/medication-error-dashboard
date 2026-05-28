@@ -476,7 +476,7 @@ with t2:
       </div>
     </div>""", unsafe_allow_html=True)
 
-    query = st.text_input("",
+    query = st.text_input("Search drug name",
         placeholder="Type a drug name — e.g.  ASPIRIN  ·  METFORMIN  ·  OZEMPIC  ·  HUMIRA",
         label_visibility="collapsed")
 
