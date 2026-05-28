@@ -195,11 +195,11 @@ def load():
     for q in ['25Q3','25Q4','26Q1']:
         dp,rp,xp = f'data/DEMO{q}.txt',f'data/DRUG{q}.txt',f'data/REAC{q}.txt'
         if not os.path.exists(dp): continue
-        d = pd.read_csv(dp,sep='$',encoding='latin-1',low_memory=False,
+       d = pd.read_csv(dp, sep='$', encoding='latin-1', low_memory=False, nrows=100000,
             usecols=lambda c: c.strip().lower() in ['primaryid','age','age_cod','sex'])
-        r = pd.read_csv(rp,sep='$',encoding='latin-1',low_memory=False,
+        r = pd.read_csv(rp, sep='$', encoding='latin-1', low_memory=False, nrows=100000,
             usecols=lambda c: c.strip().lower() in ['primaryid','drugname','role_cod'])
-        x = pd.read_csv(xp,sep='$',encoding='latin-1',low_memory=False,
+        x = pd.read_csv(xp, sep='$', encoding='latin-1', low_memory=False, nrows=100000,
             usecols=lambda c: c.strip().lower() in ['primaryid','pt'])
         for f in [d,r,x]:
             f.columns = f.columns.str.lower().str.strip()
