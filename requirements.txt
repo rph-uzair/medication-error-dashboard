@@ -1,4 +1,4 @@
 pandas
-streamlit
 plotly
 openpyxl
+streamlit<2.0

@@ -345,7 +345,7 @@ with t1:
         fig.update_layout(**BASE, title=f"Top {top_n} Drugs by Report Volume", height=420,
                           xaxis=dict(**AX,showgrid=True),
                           yaxis=dict(**AX,showgrid=False,categoryorder='total ascending'))
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig)
 
     with col2:
         # Use consistent AGE_COLORS — same colors will be used in heatmap annotation
@@ -365,7 +365,7 @@ with t1:
                             font=dict(size=14,color='#F1F5F9',family='JetBrains Mono'))
         fig2.update_layout(**BASE, title="Reports by Age Group", height=420,
                            showlegend=True, legend=LEG)
-        st.plotly_chart(fig2, use_container_width=True)
+        st.plotly_chart(fig2)
 
     # ── Reactions bar + Gender donut ──
     sh(f"Top {top_n} Adverse Reactions · Gender Split","","⚠️")
@@ -385,7 +385,7 @@ with t1:
         fig3.update_layout(**BASE, title=f"Top {top_n} Adverse Reactions", height=420,
                            xaxis=dict(**AX,showgrid=True),
                            yaxis=dict(**AX,showgrid=False,categoryorder='total ascending'))
-        st.plotly_chart(fig3, use_container_width=True)
+        st.plotly_chart(fig3)
 
     with col2:
         # Male = Sky Blue · Female = Pink — clearly distinct from reactions (violet)
@@ -401,7 +401,7 @@ with t1:
             hovertemplate='<b>%{label}</b><br>%{value:,} reports<br>%{percent}<extra></extra>'
         ))
         fig4.update_layout(**BASE, title="Reports by Gender", height=420, showlegend=False)
-        st.plotly_chart(fig4, use_container_width=True)
+        st.plotly_chart(fig4)
 
     # ── Quarterly trend ──
     sh("Quarterly Reporting Trend","","📈")
@@ -419,7 +419,7 @@ with t1:
     fig5.update_layout(**BASE, title="Total Reports by Quarter", height=300,
                        xaxis=dict(**AX,showgrid=False),
                        yaxis=dict(**AX,showgrid=True))
-    st.plotly_chart(fig5, use_container_width=True)
+    st.plotly_chart(fig5)
 
     # ── Heatmap — x-axis age groups colored to match the pie chart legend ──
     sh("Drug Reports by Age Group","Each color = one age group · same colors as legend above","🎨")
@@ -459,7 +459,7 @@ with t1:
         xaxis=dict(**AX, showgrid=True, title_text='Number of Reports'),
         yaxis=dict(**AX, showgrid=False)
     )
-    st.plotly_chart(fig6, use_container_width=True)
+    st.plotly_chart(fig6)
 
 
 # ════════════════════════════════════════════════════════════════
@@ -549,7 +549,7 @@ with t2:
                 fig.update_layout(**BASE,title="Top 12 Adverse Reactions",height=380,
                                   xaxis=dict(**AX,showgrid=True),
                                   yaxis=dict(**AX,showgrid=False,categoryorder='total ascending'))
-                st.plotly_chart(fig,use_container_width=True)
+                st.plotly_chart(fig)
 
             with col2:
                 sh(f"Age Distribution","","👥")
@@ -566,7 +566,7 @@ with t2:
                 ))
                 fig2.update_layout(**BASE,title="Age Group Breakdown",height=380,
                                    showlegend=True,legend=LEG)
-                st.plotly_chart(fig2,use_container_width=True)
+                st.plotly_chart(fig2)
 
             sh(f"Quarterly Trend","","📈")
             qt = ddf.groupby('period').size().reset_index(name='Reports')
@@ -582,7 +582,7 @@ with t2:
             fig3.update_layout(**BASE,title="Reports by Quarter",height=280,
                                xaxis=dict(**AX,showgrid=False),
                                yaxis=dict(**AX,showgrid=True))
-            st.plotly_chart(fig3,use_container_width=True)
+            st.plotly_chart(fig3)
 
             csv = ddf[['age','age_group','sex','period','pt']].rename(columns={
                 'age':'Age','age_group':'Age Group','sex':'Sex',
@@ -659,7 +659,7 @@ with t3:
             fig.update_layout(**BASE,title=f"{drug_a} · Top 10 Reactions",height=360,
                               xaxis=dict(**AX,showgrid=True),
                               yaxis=dict(**AX,showgrid=False,categoryorder='total ascending'))
-            st.plotly_chart(fig,use_container_width=True)
+            st.plotly_chart(fig)
 
         with col2:
             sh(drug_b,"Top 10 adverse reactions","💊")
@@ -675,7 +675,7 @@ with t3:
             fig2.update_layout(**BASE,title=f"{drug_b} · Top 10 Reactions",height=360,
                                xaxis=dict(**AX,showgrid=True),
                                yaxis=dict(**AX,showgrid=False,categoryorder='total ascending'))
-            st.plotly_chart(fig2,use_container_width=True)
+            st.plotly_chart(fig2)
 
         sh("Head-to-Head Metrics","","📊")
         metrics = {
@@ -831,7 +831,7 @@ with t5:
         fig_d.update_layout(**BASE, title="Top 10 Drugs", height=380,
                             xaxis=dict(**AX, showgrid=True),
                             yaxis=dict(**AX, showgrid=False, categoryorder='total ascending'))
-        st.plotly_chart(fig_d, use_container_width=True)
+        st.plotly_chart(fig_d)
 
     with col2:
         tr10 = F['pt'].value_counts().head(10).reset_index()
@@ -846,7 +846,7 @@ with t5:
         fig_r.update_layout(**BASE, title="Top 10 Adverse Reactions", height=380,
                             xaxis=dict(**AX, showgrid=True),
                             yaxis=dict(**AX, showgrid=False, categoryorder='total ascending'))
-        st.plotly_chart(fig_r, use_container_width=True)
+        st.plotly_chart(fig_r)
 
     # ── Who Is Most Affected ──
     sh("Who Is Most Affected","Age group and gender breakdown","👥")
@@ -868,7 +868,7 @@ with t5:
         fig_age.update_layout(**BASE, title="Reports by Age Group", height=320,
                               xaxis=dict(**AX, showgrid=True),
                               yaxis=dict(**AX, showgrid=False))
-        st.plotly_chart(fig_age, use_container_width=True)
+        st.plotly_chart(fig_age)
 
     with col2:
         male_n   = len(F[F['sex']=='Male'])
@@ -886,7 +886,7 @@ with t5:
             hovertemplate='<b>%{label}</b><br>%{value:,}<extra></extra>'
         ))
         fig_sex.update_layout(**BASE, title="Gender Split", height=280, showlegend=False)
-        st.plotly_chart(fig_sex, use_container_width=True)
+        st.plotly_chart(fig_sex)
 
     # ── Download ──
     sh("Download the Data","Export the complete filtered dataset","⬇️")
