@@ -293,8 +293,9 @@ st.markdown(f"""
   </div>
   <div style="display:flex;align-items:center;gap:14px">
     <div style="text-align:right">
-      <div style="font-size:10px;color:#334155;letter-spacing:.07em;text-transform:uppercase;font-weight:600">Total Records</div>
-      <div style="font-size:14px;color:#0EA5E9;font-weight:700;font-family:'JetBrains Mono',monospace;margin-top:2px">{len(DF):,}</div>
+      <div style="font-size:10px;color:#334155;letter-spacing:.07em;text-transform:uppercase;font-weight:600">Full Dataset</div>
+      <div style="font-size:14px;color:#0EA5E9;font-weight:700;font-family:'JetBrains Mono',monospace;margin-top:2px">2,647,622</div>
+      <div style="font-size:10px;color:#334155;margin-top:2px">Demo: {len(DF):,} loaded · full run locally</div>
     </div>
     <div style="padding:6px 12px;background:rgba(16,185,129,.08);
                 border:1px solid rgba(16,185,129,.22);border-radius:6px;
@@ -305,6 +306,19 @@ st.markdown(f"""
 
 
 # ── TABS ────────────────────────────────────────────────────────
+st.markdown("""
+<div style="padding:10px 16px;background:rgba(14,165,233,0.05);
+            border:1px solid rgba(14,165,233,0.12);border-radius:8px;
+            margin-bottom:16px;font-size:12px;color:#64748B">
+  ℹ️  <b style="color:#94A3B8">Cloud Demo Mode</b> — This deployment loads a 
+  representative sample of <b style="color:#0EA5E9">300,000 records</b> to fit within 
+  free-tier cloud memory limits (1GB). The full dataset contains 
+  <b style="color:#0EA5E9">2,647,622 records</b> across Q3 2025–Q1 2026 and runs 
+  completely on local deployment. All features, charts, and tabs are fully functional 
+  on both versions.
+</div>
+""", unsafe_allow_html=True)
+
 t1,t2,t3,t4,t5 = st.tabs([
     "📊   Overview",
     "🔍   Drug Safety Search",
