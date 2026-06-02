@@ -195,11 +195,11 @@ def load():
     for q in ['25Q3','25Q4','26Q1']:
         dp,rp,xp = f'data/DEMO{q}.txt',f'data/DRUG{q}.txt',f'data/REAC{q}.txt'
         if not os.path.exists(dp): continue
-        d = pd.read_csv(dp,sep='$',encoding='latin-1',low_memory=False,nrows=100000,
+        d = pd.read_csv(dp,sep='$',encoding='latin-1',low_memory=False,
             usecols=lambda c: c.strip().lower() in ['primaryid','age','age_cod','sex'])
-        r = pd.read_csv(rp,sep='$',encoding='latin-1',low_memory=False,nrows=100000,
+        r = pd.read_csv(rp,sep='$',encoding='latin-1',low_memory=False,
             usecols=lambda c: c.strip().lower() in ['primaryid','drugname','role_cod'])
-        x = pd.read_csv(xp,sep='$',encoding='latin-1',low_memory=False,nrows=100000,
+        x = pd.read_csv(xp,sep='$',encoding='latin-1',low_memory=False,
             usecols=lambda c: c.strip().lower() in ['primaryid','pt'])
         for f in [d,r,x]:
             f.columns = f.columns.str.lower().str.strip()
@@ -293,9 +293,8 @@ st.markdown(f"""
   </div>
   <div style="display:flex;align-items:center;gap:14px">
     <div style="text-align:right">
-      <div style="font-size:10px;color:#334155;letter-spacing:.07em;text-transform:uppercase;font-weight:600">Full Dataset</div>
-      <div style="font-size:14px;color:#0EA5E9;font-weight:700;font-family:'JetBrains Mono',monospace;margin-top:2px">2,647,622</div>
-      <div style="font-size:10px;color:#334155;margin-top:2px">Demo: {len(DF):,} loaded · full run locally</div>
+      <div style="font-size:10px;color:#334155;letter-spacing:.07em;text-transform:uppercase;font-weight:600">Total Records</div>
+      <div style="font-size:14px;color:#0EA5E9;font-weight:700;font-family:'JetBrains Mono',monospace;margin-top:2px">{len(DF):,}</div>
     </div>
     <div style="padding:6px 12px;background:rgba(16,185,129,.08);
                 border:1px solid rgba(16,185,129,.22);border-radius:6px;
@@ -306,19 +305,6 @@ st.markdown(f"""
 
 
 # ── TABS ────────────────────────────────────────────────────────
-st.markdown("""
-<div style="padding:10px 16px;background:rgba(14,165,233,0.05);
-            border:1px solid rgba(14,165,233,0.12);border-radius:8px;
-            margin-bottom:16px;font-size:12px;color:#64748B">
-  ℹ️  <b style="color:#94A3B8">Cloud Demo Mode</b> — This deployment loads a 
-  representative sample of <b style="color:#0EA5E9">300,000 records</b> to fit within 
-  free-tier cloud memory limits (1GB). The full dataset contains 
-  <b style="color:#0EA5E9">2,647,622 records</b> across Q3 2025–Q1 2026 and runs 
-  completely on local deployment. All features, charts, and tabs are fully functional 
-  on both versions.
-</div>
-""", unsafe_allow_html=True)
-
 t1,t2,t3,t4,t5 = st.tabs([
     "📊   Overview",
     "🔍   Drug Safety Search",
@@ -359,7 +345,7 @@ with t1:
         fig.update_layout(**BASE, title=f"Top {top_n} Drugs by Report Volume", height=420,
                           xaxis=dict(**AX,showgrid=True),
                           yaxis=dict(**AX,showgrid=False,categoryorder='total ascending'))
-        st.plotly_chart(fig)
+        st.plotly_chart(fig, use_container_width=True)
 
     with col2:
         # Use consistent AGE_COLORS — same colors will be used in heatmap annotation
@@ -379,7 +365,7 @@ with t1:
                             font=dict(size=14,color='#F1F5F9',family='JetBrains Mono'))
         fig2.update_layout(**BASE, title="Reports by Age Group", height=420,
                            showlegend=True, legend=LEG)
-        st.plotly_chart(fig2)
+        st.plotly_chart(fig2, use_container_width=True)
 
     # ── Reactions bar + Gender donut ──
     sh(f"Top {top_n} Adverse Reactions · Gender Split","","⚠️")
@@ -399,7 +385,7 @@ with t1:
         fig3.update_layout(**BASE, title=f"Top {top_n} Adverse Reactions", height=420,
                            xaxis=dict(**AX,showgrid=True),
                            yaxis=dict(**AX,showgrid=False,categoryorder='total ascending'))
-        st.plotly_chart(fig3)
+        st.plotly_chart(fig3, use_container_width=True)
 
     with col2:
         # Male = Sky Blue · Female = Pink — clearly distinct from reactions (violet)
@@ -415,7 +401,7 @@ with t1:
             hovertemplate='<b>%{label}</b><br>%{value:,} reports<br>%{percent}<extra></extra>'
         ))
         fig4.update_layout(**BASE, title="Reports by Gender", height=420, showlegend=False)
-        st.plotly_chart(fig4)
+        st.plotly_chart(fig4, use_container_width=True)
 
     # ── Quarterly trend ──
     sh("Quarterly Reporting Trend","","📈")
@@ -433,7 +419,7 @@ with t1:
     fig5.update_layout(**BASE, title="Total Reports by Quarter", height=300,
                        xaxis=dict(**AX,showgrid=False),
                        yaxis=dict(**AX,showgrid=True))
-    st.plotly_chart(fig5)
+    st.plotly_chart(fig5, use_container_width=True)
 
     # ── Heatmap — x-axis age groups colored to match the pie chart legend ──
     sh("Drug Reports by Age Group","Each color = one age group · same colors as legend above","🎨")
@@ -473,7 +459,7 @@ with t1:
         xaxis=dict(**AX, showgrid=True, title_text='Number of Reports'),
         yaxis=dict(**AX, showgrid=False)
     )
-    st.plotly_chart(fig6)
+    st.plotly_chart(fig6, use_container_width=True)
 
 
 # ════════════════════════════════════════════════════════════════
@@ -490,7 +476,7 @@ with t2:
       </div>
     </div>""", unsafe_allow_html=True)
 
-    query = st.text_input("Search drug name",
+    query = st.text_input("",
         placeholder="Type a drug name — e.g.  ASPIRIN  ·  METFORMIN  ·  OZEMPIC  ·  HUMIRA",
         label_visibility="collapsed")
 
@@ -563,7 +549,7 @@ with t2:
                 fig.update_layout(**BASE,title="Top 12 Adverse Reactions",height=380,
                                   xaxis=dict(**AX,showgrid=True),
                                   yaxis=dict(**AX,showgrid=False,categoryorder='total ascending'))
-                st.plotly_chart(fig)
+                st.plotly_chart(fig,use_container_width=True)
 
             with col2:
                 sh(f"Age Distribution","","👥")
@@ -580,7 +566,7 @@ with t2:
                 ))
                 fig2.update_layout(**BASE,title="Age Group Breakdown",height=380,
                                    showlegend=True,legend=LEG)
-                st.plotly_chart(fig2)
+                st.plotly_chart(fig2,use_container_width=True)
 
             sh(f"Quarterly Trend","","📈")
             qt = ddf.groupby('period').size().reset_index(name='Reports')
@@ -596,7 +582,7 @@ with t2:
             fig3.update_layout(**BASE,title="Reports by Quarter",height=280,
                                xaxis=dict(**AX,showgrid=False),
                                yaxis=dict(**AX,showgrid=True))
-            st.plotly_chart(fig3)
+            st.plotly_chart(fig3,use_container_width=True)
 
             csv = ddf[['age','age_group','sex','period','pt']].rename(columns={
                 'age':'Age','age_group':'Age Group','sex':'Sex',
@@ -673,7 +659,7 @@ with t3:
             fig.update_layout(**BASE,title=f"{drug_a} · Top 10 Reactions",height=360,
                               xaxis=dict(**AX,showgrid=True),
                               yaxis=dict(**AX,showgrid=False,categoryorder='total ascending'))
-            st.plotly_chart(fig)
+            st.plotly_chart(fig,use_container_width=True)
 
         with col2:
             sh(drug_b,"Top 10 adverse reactions","💊")
@@ -689,7 +675,7 @@ with t3:
             fig2.update_layout(**BASE,title=f"{drug_b} · Top 10 Reactions",height=360,
                                xaxis=dict(**AX,showgrid=True),
                                yaxis=dict(**AX,showgrid=False,categoryorder='total ascending'))
-            st.plotly_chart(fig2)
+            st.plotly_chart(fig2,use_container_width=True)
 
         sh("Head-to-Head Metrics","","📊")
         metrics = {
@@ -845,7 +831,7 @@ with t5:
         fig_d.update_layout(**BASE, title="Top 10 Drugs", height=380,
                             xaxis=dict(**AX, showgrid=True),
                             yaxis=dict(**AX, showgrid=False, categoryorder='total ascending'))
-        st.plotly_chart(fig_d)
+        st.plotly_chart(fig_d, use_container_width=True)
 
     with col2:
         tr10 = F['pt'].value_counts().head(10).reset_index()
@@ -860,7 +846,7 @@ with t5:
         fig_r.update_layout(**BASE, title="Top 10 Adverse Reactions", height=380,
                             xaxis=dict(**AX, showgrid=True),
                             yaxis=dict(**AX, showgrid=False, categoryorder='total ascending'))
-        st.plotly_chart(fig_r)
+        st.plotly_chart(fig_r, use_container_width=True)
 
     # ── Who Is Most Affected ──
     sh("Who Is Most Affected","Age group and gender breakdown","👥")
@@ -882,7 +868,7 @@ with t5:
         fig_age.update_layout(**BASE, title="Reports by Age Group", height=320,
                               xaxis=dict(**AX, showgrid=True),
                               yaxis=dict(**AX, showgrid=False))
-        st.plotly_chart(fig_age)
+        st.plotly_chart(fig_age, use_container_width=True)
 
     with col2:
         male_n   = len(F[F['sex']=='Male'])
@@ -900,7 +886,7 @@ with t5:
             hovertemplate='<b>%{label}</b><br>%{value:,}<extra></extra>'
         ))
         fig_sex.update_layout(**BASE, title="Gender Split", height=280, showlegend=False)
-        st.plotly_chart(fig_sex)
+        st.plotly_chart(fig_sex, use_container_width=True)
 
     # ── Download ──
     sh("Download the Data","Export the complete filtered dataset","⬇️")
