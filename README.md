@@ -63,17 +63,39 @@ The project combines a **PharmD clinical background** with applied data science 
 
 ## 🖥️ Screenshots
 
-### Overview — Drug Reporting Patterns
-![Overview Tab](screenshots/overview.png)
+### Overview
+
+![Overview 1](Screenshots/overview.png)
+
+![Overview 2](Screenshots/overview(i).png)
+
+![Overview 3](Screenshots/overview(ii).png)
 
 ### Drug Safety Search
-![Drug Safety Search](screenshots/drug_search.png)
+
+![Drug Search 1](Screenshots/drug_search.png)
+
+![Drug Search 2](Screenshots/drug_search(i).png)
 
 ### High Risk Alerts
-![High Risk Alerts](screenshots/high_risk.png)
+
+![High Risk 1](Screenshots/high_risk.png)
+
+![High Risk 2](Screenshots/high_risk(i).png)
+
+![High Risk 3](Screenshots/high_risk(ii).png)
+
+![High Risk 4](Screenshots/high_risk(iii).png)
+
+![High Risk 5](Screenshots/high_risk(iv).png)
 
 ### Drug Comparison
-![Drug Comparison](screenshots/comparison.png)
+
+![Drug Comparison](Screenshots/comparison.png)
+
+### Drug Explorer
+
+![Drug Explorer](Screenshots/drug_explorer.png)
 
 ---
 
