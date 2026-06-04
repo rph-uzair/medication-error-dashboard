@@ -170,7 +170,7 @@ Doctor of Pharmacy · University of Peshawar, Pakistan
 2× Clinical Internships · 1× Industrial Internship  
 
 [![GitHub](https://img.shields.io/badge/GitHub-rph--uzair-181717?style=flat&logo=github)](https://github.com/rph-uzair)
-[![www.linkedin.com/in/muhammad-uzair-rph-891278384)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Muhammad%20Uzair-0A66C2?style=flat&logo=linkedin)](https://www.linkedin.com/in/muhammad-uzair-rph-891278384)
 ---
 
 ## 📄 Data License
